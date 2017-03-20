@@ -16,6 +16,14 @@ namespace NorthWindWebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            var formatters = GlobalConfiguration.Configuration.Formatters;
+
+            formatters.Remove(formatters.XmlFormatter);
+            //formatter.SerializerSettings.ContractResolver =
+            //    new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+
+            //config.Formatters.JsonFormatter.SupportedMediaTypes.Add(newMediaTypeHeaderValue("text/html"));
         }
     }
 }

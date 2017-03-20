@@ -1,2 +1,3 @@
 INFO  2017-03-20 16:51:58,069  4956ms CustomersController    GetCustomers       - Application is working
 INFO  2017-03-20 16:52:02,004  8891ms CustomersController    GetCustomers       - Application is working
+INFO  2017-03-20 20:54:14,677 56677ms CustomersController    GetCustomers       - Get customer is working
