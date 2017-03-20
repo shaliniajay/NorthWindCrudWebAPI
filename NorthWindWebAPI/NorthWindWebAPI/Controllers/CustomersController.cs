@@ -8,6 +8,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.Ajax.Utilities;
+using NorthWindWebAPI.BussinessLogic;
 using NorthWindWebAPI.DataModel;
 
 namespace NorthWindWebAPI.Controllers
@@ -19,10 +21,28 @@ namespace NorthWindWebAPI.Controllers
 
         private Northwind db = new Northwind();
 
-        // GET: api/Customers
+        public IRepository _repository;
+         public CustomersController(IRepository repository)
+       {
+           _repository = repository;
+       }
+
+        [HttpGet]
+         public string TestIoc()
+        {
+
+            log.Info("Ioc test passed");
+             return _repository.GetCustomers();
+
+             //return db.Customers;
+        }
+
+        [HttpGet]
         public IQueryable<Customer> GetCustomers()
         {
+
             log.Info("Get customer is working");
+           
           
             return db.Customers;
         }
@@ -75,7 +95,7 @@ namespace NorthWindWebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Customers
+        [HttpPost]
         [ResponseType(typeof(Customer))]
         public IHttpActionResult PostCustomer(Customer customer)
         {

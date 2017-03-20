@@ -8,6 +8,9 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using log4net.Config;
 using System.IO;
+using System.Reflection;
+using Autofac;
+using Autofac.Integration.WebApi;
 
 namespace NorthWindWebAPI
 {
@@ -22,6 +25,9 @@ namespace NorthWindWebAPI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
+
+            //Call Autofac DI configurations
+            IocConfig.RegisterDependencies();
         }
     }
 }
