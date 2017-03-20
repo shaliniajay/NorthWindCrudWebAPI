@@ -14,11 +14,16 @@ namespace NorthWindWebAPI.Controllers
 {
     public class CustomersController : ApiController
     {
+        private static readonly log4net.ILog log =
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private Northwind db = new Northwind();
 
         // GET: api/Customers
         public IQueryable<Customer> GetCustomers()
         {
+            log.Info("Get customer is working");
+          
             return db.Customers;
         }
 
