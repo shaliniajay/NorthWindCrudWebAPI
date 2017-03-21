@@ -8,9 +8,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
+using System.Web.Mvc;
+using AutoMapper;
 using Microsoft.Ajax.Utilities;
 using NorthWindWebAPI.BussinessLogic;
 using NorthWindWebAPI.DataModel;
+using NorthWindWebAPI.ViewModel;
 
 namespace NorthWindWebAPI.Controllers
 {
@@ -22,12 +26,14 @@ namespace NorthWindWebAPI.Controllers
         private Northwind db = new Northwind();
 
         public IRepository _repository;
+
+        
          public CustomersController(IRepository repository)
        {
            _repository = repository;
        }
 
-        [HttpGet]
+        [System.Web.Http.HttpGet]
          public string TestIoc()
         {
 
@@ -37,7 +43,7 @@ namespace NorthWindWebAPI.Controllers
              //return db.Customers;
         }
 
-        [HttpGet]
+        [System.Web.Http.HttpGet]
         public IQueryable<Customer> GetCustomers()
         {
 
@@ -95,34 +101,28 @@ namespace NorthWindWebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [HttpPost]
-        [ResponseType(typeof(Customer))]
-        public IHttpActionResult PostCustomer(Customer customer)
+        [System.Web.Http.HttpPost]
+        public string PostCustomer([FromBody] CustomerViewModel custvm)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Customers.Add(customer);
-
             try
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (CustomerExists(customer.CustomerID))
+                if (ModelState.IsValid)
                 {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                    var newCust = Mapper.Map<Customer>(custvm);
+                    //add to database
+                    
+                    log.Info("Added to database");
+                    return "Added";
 
-            return CreatedAtRoute("DefaultApi", new { id = customer.CustomerID }, customer);
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                log.Error("Cannot be Added " + ex );
+            }
+            
+            return "Failed";
         }
 
         // DELETE: api/Customers/5

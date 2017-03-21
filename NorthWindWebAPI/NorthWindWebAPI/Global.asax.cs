@@ -11,6 +11,7 @@ using System.IO;
 using System.Reflection;
 using Autofac;
 using Autofac.Integration.WebApi;
+using NorthWindWebAPI.ViewModel;
 
 namespace NorthWindWebAPI
 {
@@ -26,8 +27,13 @@ namespace NorthWindWebAPI
 
             log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
 
-            //Call Autofac DI configurations
+            //Call Autofac DI bootstrapper class to register all the dependencies
             IocConfig.RegisterDependencies();
+            //Call  Automapper bootstrapper class to create all the mappings
+            AutomapperConfig.RegisterMappings();
+
+          
+
         }
     }
 }
