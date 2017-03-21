@@ -69,7 +69,8 @@ namespace NorthWindWebAPI.Controllers
             catch (Exception ex)
             {
 
-                log.Error(Request.CreateResponse("Cannot be Added " + ex));
+                log.Error("Cannot be Added " + ex);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
 
             var errorList = (from item in ModelState.Values
