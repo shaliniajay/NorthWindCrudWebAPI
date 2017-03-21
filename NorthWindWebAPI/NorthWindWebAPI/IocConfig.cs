@@ -17,7 +17,7 @@ namespace NorthWindWebAPI
             var builder = new ContainerBuilder();
             var config = new HttpConfiguration();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            builder.Register(c => new Repository()).As<IRepository>().InstancePerRequest();
+            builder.Register(c => new CustomerRepository()).As<ICustomerRepository>().InstancePerRequest();
             var container = builder.Build();
             var resolver = new AutofacWebApiDependencyResolver(container);
             GlobalConfiguration.Configuration.DependencyResolver = resolver;

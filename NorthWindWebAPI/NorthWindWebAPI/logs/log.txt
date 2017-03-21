@@ -4,3 +4,17 @@ INFO  2017-03-20 20:54:14,677 56677ms CustomersController    GetCustomers       
 INFO  2017-03-20 21:02:35,260 10745ms CustomersController    GetCustomers       - Get customer is working
 INFO  2017-03-21 10:22:35,749 779705ms CustomersController    TestIoc            - Ioc test passed
 INFO  2017-03-21 12:41:50,908 27697ms CustomersController    PostCustomer       - Added to database
+
+INFO  2017-03-21 16:03:28,568 11089ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 20:27:44,598 15867119ms CustomersController    PostCustomer       - Added to database
+INFO  2017-03-21 20:43:33,830 78270ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 20:44:58,116 162557ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 20:49:44,226 49597ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 20:51:07,179  5130ms CustomersController    TestIoc            - Ioc test passed
+INFO  2017-03-21 20:53:31,713  4650ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 20:58:18,532 18901ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 21:18:46,983 19197ms CustomersController    PostCustomer       - Added to database
+INFO  2017-03-21 21:21:02,877 155091ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 21:27:07,901 19625ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 21:39:22,981  5468ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 21:39:49,529 32016ms CustomersController    PostCustomer       - Added to database

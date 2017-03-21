@@ -9,7 +9,6 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.Results;
-using System.Web.Mvc;
 using AutoMapper;
 using Microsoft.Ajax.Utilities;
 using NorthWindWebAPI.BussinessLogic;
@@ -23,86 +22,36 @@ namespace NorthWindWebAPI.Controllers
         private static readonly log4net.ILog log =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private Northwind db = new Northwind();
+        private ICustomerRepository _custRepository;
 
-        public IRepository _repository;
 
-        
-         public CustomersController(IRepository repository)
-       {
-           _repository = repository;
-       }
-
-        [System.Web.Http.HttpGet]
-         public string TestIoc()
+        public CustomersController(ICustomerRepository custRepository)
         {
-
-            log.Info("Ioc test passed");
-             return _repository.GetCustomers();
-
-             //return db.Customers;
+            _custRepository = custRepository;
         }
 
-        [System.Web.Http.HttpGet]
-        public IQueryable<Customer> GetCustomers()
+
+        [HttpGet]
+        public IHttpActionResult AllCustomers()
         {
-
-            log.Info("Get customer is working");
-           
-          
-            return db.Customers;
-        }
-
-        // GET: api/Customers/5
-        [ResponseType(typeof(Customer))]
-        public IHttpActionResult GetCustomer(string id)
-        {
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(customer);
-        }
-
-        // PUT: api/Customers/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCustomer(string id, Customer customer)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != customer.CustomerID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(customer).State = EntityState.Modified;
-
             try
             {
-                db.SaveChanges();
+                log.Info("Get allcustomer is working");
+                return Ok(_custRepository.GetAllCustomers());
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!CustomerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                log.Error("Failed");
+                return InternalServerError();
+
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [System.Web.Http.HttpPost]
-        public string PostCustomer([FromBody] CustomerViewModel custvm)
+      
+        [HttpPost]
+        //[ValidationActionFilter]
+        public HttpResponseMessage PostCustomer([FromBody] CustomerViewModel custvm)
         {
             try
             {
@@ -110,49 +59,106 @@ namespace NorthWindWebAPI.Controllers
                 {
                     var newCust = Mapper.Map<Customer>(custvm);
                     //add to database
-                    
+
                     log.Info("Added to database");
-                    return "Added";
 
                 }
+
+
             }
             catch (Exception ex)
             {
-                
-                log.Error("Cannot be Added " + ex );
-            }
-            
-            return "Failed";
-        }
 
-        // DELETE: api/Customers/5
-        [ResponseType(typeof(Customer))]
-        public IHttpActionResult DeleteCustomer(string id)
-        {
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
-            {
-                return NotFound();
+                log.Error(Request.CreateResponse("Cannot be Added " + ex));
             }
 
-            db.Customers.Remove(customer);
-            db.SaveChanges();
+            var errorList = (from item in ModelState.Values
+                             from error in item.Errors
+                             select error.ErrorMessage).ToList();
 
-            return Ok(customer);
+            return Request.CreateResponse(HttpStatusCode.NotAcceptable, errorList);
+
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //// GET: api/Customers/5
+        //[ResponseType(typeof(Customer))]
+        //public IHttpActionResult GetCustomer(string id)
+        //{
+        //    Customer customer = db.Customers.Find(id);
+        //    if (customer == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        private bool CustomerExists(string id)
-        {
-            return db.Customers.Count(e => e.CustomerID == id) > 0;
-        }
+        //    return Ok(customer);
+        //}
+
+
+        //// PUT: api/Customers/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutCustomer(string id, Customer customer)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (id != customer.CustomerID)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    db.Entry(customer).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!CustomerExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
+
+      
+
+        //// DELETE: api/Customers/5
+        //[ResponseType(typeof(Customer))]
+        //public IHttpActionResult DeleteCustomer(string id)
+        //{
+        //    Customer customer = db.Customers.Find(id);
+        //    if (customer == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    db.Customers.Remove(customer);
+        //    db.SaveChanges();
+
+        //    return Ok(customer);
+        //}
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
+
+        //private bool CustomerExists(string id)
+        //{
+        //    return db.Customers.Count(e => e.CustomerID == id) > 0;
+        //}
     }
 }
