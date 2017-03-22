@@ -11,6 +11,7 @@ using System.IO;
 using System.Reflection;
 using Autofac;
 using Autofac.Integration.WebApi;
+using NorthWindWebAPI.CustomFilters;
 using NorthWindWebAPI.ViewModel;
 
 namespace NorthWindWebAPI
@@ -24,6 +25,7 @@ namespace NorthWindWebAPI
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalConfiguration.Configuration.Filters.Add(new ValidateModelStateAttribute());
 
             log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
 

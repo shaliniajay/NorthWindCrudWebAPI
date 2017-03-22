@@ -192,6 +192,7 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="CustomFilters\ValidateModelStateAttribute .cs" />
     <Compile Include="DataModel\Customer.cs" />
     <Compile Include="DataModel\Employee.cs" />
     <Compile Include="DataModel\Northwind.cs" />

@@ -12,6 +12,7 @@ using System.Web.Http.Results;
 using AutoMapper;
 using Microsoft.Ajax.Utilities;
 using NorthWindWebAPI.BussinessLogic;
+using NorthWindWebAPI.CustomFilters;
 using NorthWindWebAPI.DataModel;
 using NorthWindWebAPI.ViewModel;
 
@@ -54,34 +55,23 @@ namespace NorthWindWebAPI.Controllers
       
         [HttpPost]
         //[ValidationActionFilter]
+         [ValidateModelState]
         public HttpResponseMessage PostCustomer([FromBody] CustomerViewModel custvm)
         {
             try
             {
-                if (ModelState.IsValid)
                 {
                     var newCust = Mapper.Map<Customer>(custvm);
                     //add to database
-
                     log.Info("Added to database");
-
+                    return Request.CreateResponse(HttpStatusCode.OK,"Successfully Added");
                 }
-
-
             }
             catch (Exception ex)
             {
-
                 log.Error("Cannot be Added " + ex);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
-
-            var errorList = (from item in ModelState.Values
-                             from error in item.Errors
-                             select error.ErrorMessage).ToList();
-
-            return Request.CreateResponse(HttpStatusCode.NotAcceptable, errorList);
-
         }
 
         //// GET: api/Customers/5
