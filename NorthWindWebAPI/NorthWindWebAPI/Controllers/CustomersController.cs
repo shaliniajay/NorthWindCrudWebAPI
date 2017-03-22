@@ -37,7 +37,10 @@ namespace NorthWindWebAPI.Controllers
             try
             {
                 log.Info("Get allcustomer is working");
-                return Ok(_custRepository.GetAllCustomers());
+                var allCustomers = _custRepository.GetAllCustomers();
+                //var allVmCust = Mapper.Map<CustomerViewModel>(allCustomers);
+
+                return Ok(allCustomers);
             }
             catch (Exception ex)
             {

@@ -10,7 +10,7 @@ namespace NorthWindWebAPI.BussinessLogic
 {
     public interface ICustomerRepository
     {
-        IQueryable<Customer> GetAllCustomers();
+        dynamic GetAllCustomers();
         Customer GetCustomer(string id);
         string AddCustomer(string id, CustomerViewModel vmCust);
         string Deletecustomer(string id);

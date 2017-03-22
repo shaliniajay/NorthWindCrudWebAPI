@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace NorthWindWebAPI.DataModel
 {
     using System;
@@ -8,6 +10,11 @@ namespace NorthWindWebAPI.DataModel
 
     public partial class Customer
     {
+        public Customer()
+        {
+            Orders = new HashSet<Order>();
+        }
+
         [StringLength(5)]
         public string CustomerID { get; set; }
 
@@ -41,5 +48,8 @@ namespace NorthWindWebAPI.DataModel
 
         [StringLength(24)]
         public string Fax { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

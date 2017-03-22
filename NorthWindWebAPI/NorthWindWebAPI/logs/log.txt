@@ -27,3 +27,16 @@ ERROR 2017-03-21 21:53:44,610 10424ms CustomersController    PostCustomer       
    at CallSite.Target(Closure , CallSite , Object )
    at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
    at NorthWindWebAPI.Controllers.CustomersController.PostCustomer(CustomerViewModel custvm) in d:\ShaliniWorkplace\WebAPI\NorthWindWebAPI\NorthWindWebAPI\Controllers\CustomersController.cs:line 59
+INFO  2017-03-21 22:14:37,159 10791ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 22:14:59,667 33299ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 22:15:54,548 88180ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 22:23:53,718 12132ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 22:25:39,618  4204ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-21 22:27:34,125  2870ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-22 11:19:24,452 569729ms CustomersController    PostCustomer       - Added to database
+INFO  2017-03-22 11:20:02,946 608223ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-22 11:28:25,215  6022ms CustomersController    AllCustomers       - Get allcustomer is working
+ERROR 2017-03-22 11:28:32,352 13160ms CustomersController    AllCustomers       - Failed
+INFO  2017-03-22 11:28:44,392 25199ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-22 11:40:37,668 31234ms CustomersController    AllCustomers       - Get allcustomer is working
+INFO  2017-03-22 11:44:11,865 42313ms CustomersController    AllCustomers       - Get allcustomer is working

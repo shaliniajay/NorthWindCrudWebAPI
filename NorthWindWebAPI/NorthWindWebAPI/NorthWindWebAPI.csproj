@@ -187,13 +187,16 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BussinessLogic\CustomerRepository.cs" />
-    <Compile Include="BussinessLogic\IcustomerRepository.cs" />
+    <Compile Include="BussinessLogic\ICustomerRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DataModel\Customer.cs" />
+    <Compile Include="DataModel\Employee.cs" />
     <Compile Include="DataModel\Northwind.cs" />
+    <Compile Include="DataModel\Order.cs" />
+    <Compile Include="DataModel\Product.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

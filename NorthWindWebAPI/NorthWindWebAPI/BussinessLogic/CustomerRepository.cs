@@ -9,7 +9,7 @@ namespace NorthWindWebAPI.BussinessLogic
     public class CustomerRepository : ICustomerRepository, IDisposable
     {
         private Northwind _db = new Northwind();
-        public IQueryable<Customer> GetAllCustomers()
+        public dynamic GetAllCustomers()
         {
             try
             {
