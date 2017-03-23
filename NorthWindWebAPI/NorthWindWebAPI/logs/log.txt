@@ -43,3 +43,4 @@ INFO  2017-03-22 11:44:11,865 42313ms CustomersController    AllCustomers       
 INFO  2017-03-22 12:42:39,681 32836ms CustomersController    PostCustomer       - Added to database
 INFO  2017-03-22 12:53:16,755 73008ms CustomersController    PostCustomer       - Added to database
 INFO  2017-03-22 12:54:22,049 16691ms CustomersController    PostCustomer       - Added to database
+INFO  2017-03-23 11:52:02,905 671642ms CustomersController    AllCustomers       - Get allcustomer is working
