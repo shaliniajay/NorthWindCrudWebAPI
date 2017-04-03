@@ -3,25 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using AutoMapper;
 
 namespace NorthWindWebAPI.BussinessLogic
 {
     public class CustomerRepository : ICustomerRepository, IDisposable
     {
+        private static readonly log4net.ILog log =
+          log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private Northwind _db = new Northwind();
         public IEnumerable<Customer> GetAllCustomers()
         {
-            try
-            {
                 return _db.Customers;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-
         }
 
         public Customer GetCustomer(string id)
@@ -30,17 +24,33 @@ namespace NorthWindWebAPI.BussinessLogic
             return customer;
         }
 
-        public string AddCustomer(string id, ViewModel.CustomerViewModel vmCust)
+        public void AddCustomer(Customer cust)
         {
-            throw new NotImplementedException();
+                _db.Customers.Add(cust);
+                _db.SaveChanges();
         }
+
+        //public string UpdateCustomer(string id, ViewModel.CustomerViewModel vmCust)
+        //{
+        //    if (_db.Customers.Count(e => e.CustomerID == id) > 0)
+        //    {
+                
+        //    }
+        //}
 
         public string Deletecustomer(string id)
         {
-            throw new NotImplementedException();
+            Customer customer = _db.Customers.Find(id);
+            if (customer == null)
+            {
+                return "Not found";
+            }
+
+            _db.Customers.Remove(customer);
+            _db.SaveChanges();
+
+            return "Successfully Deleted";
         }
-
-
 
         public void Dispose()
         {

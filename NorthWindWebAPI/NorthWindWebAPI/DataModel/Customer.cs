@@ -49,7 +49,7 @@ namespace NorthWindWebAPI.DataModel
         [StringLength(24)]
         public string Fax { get; set; }
 
-        [JsonIgnore]
+      
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

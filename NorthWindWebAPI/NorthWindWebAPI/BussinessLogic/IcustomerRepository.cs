@@ -12,7 +12,8 @@ namespace NorthWindWebAPI.BussinessLogic
     {
         IEnumerable<Customer> GetAllCustomers();
         Customer GetCustomer(string id);
-        string AddCustomer(string id, CustomerViewModel vmCust);
+        void AddCustomer(Customer cust);
+      //  string UpdateCustomer(string id, CustomerViewModel vmCust);
         string Deletecustomer(string id);
     }
 }

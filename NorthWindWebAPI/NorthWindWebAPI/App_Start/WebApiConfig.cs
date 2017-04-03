@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace NorthWindWebAPI
 {
@@ -18,12 +19,8 @@ namespace NorthWindWebAPI
             );
 
             var formatters = GlobalConfiguration.Configuration.Formatters;
-
             formatters.Remove(formatters.XmlFormatter);
-            //formatter.SerializerSettings.ContractResolver =
-            //    new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
-
-            //config.Formatters.JsonFormatter.SupportedMediaTypes.Add(newMediaTypeHeaderValue("text/html"));
+          
         }
     }
 }

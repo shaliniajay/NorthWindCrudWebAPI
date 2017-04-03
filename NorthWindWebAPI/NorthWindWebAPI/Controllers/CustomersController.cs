@@ -31,7 +31,7 @@ namespace NorthWindWebAPI.Controllers
             _custRepository = custRepository;
         }
 
-
+       
         [HttpGet]
         public IHttpActionResult AllCustomers()
         {
@@ -39,7 +39,6 @@ namespace NorthWindWebAPI.Controllers
             {
                 log.Info("Get allcustomer is working");
                 var allCustomers = _custRepository.GetAllCustomers();
-                //var allVmCust = Mapper.Map<CustomerViewModel>(allCustomers);
 
                 return Ok(allCustomers);
             }
@@ -63,29 +62,26 @@ namespace NorthWindWebAPI.Controllers
                 {
                     var newCust = Mapper.Map<Customer>(custvm);
                     //add to database
-                    log.Info("Added to database");
+                    _custRepository.AddCustomer(newCust);
+                    log.Info("Added Customer");
                     return Request.CreateResponse(HttpStatusCode.OK,"Successfully Added");
                 }
             }
             catch (Exception ex)
             {
-                log.Error("Cannot be Added " + ex);
+                log.Error("Cannot be Added " + ex.Message);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
         }
 
-        //// GET: api/Customers/5
-        //[ResponseType(typeof(Customer))]
-        //public IHttpActionResult GetCustomer(string id)
-        //{
-        //    Customer customer = db.Customers.Find(id);
-        //    if (customer == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: api/Customers/5
+        [ResponseType(typeof(Customer))]
+        public IHttpActionResult GetCustomer(string id)
+        {
+            var result = _custRepository.GetCustomer(id);
 
-        //    return Ok(customer);
-        //}
+            return Ok(result);
+        }
 
 
         //// PUT: api/Customers/5
@@ -102,7 +98,7 @@ namespace NorthWindWebAPI.Controllers
         //        return BadRequest();
         //    }
 
-        //    db.Entry(customer).State = EntityState.Modified;
+          // db.Entry(customer).State = EntityState.Modified;
 
         //    try
         //    {
@@ -123,23 +119,25 @@ namespace NorthWindWebAPI.Controllers
         //    return StatusCode(HttpStatusCode.NoContent);
         //}
 
-      
 
-        //// DELETE: api/Customers/5
-        //[ResponseType(typeof(Customer))]
-        //public IHttpActionResult DeleteCustomer(string id)
-        //{
-        //    Customer customer = db.Customers.Find(id);
-        //    if (customer == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    db.Customers.Remove(customer);
-        //    db.SaveChanges();
-
-        //    return Ok(customer);
-        //}
+        // DELETE: api/Customers/5
+       [HttpPost]
+        public IHttpActionResult DeleteCustomer(string id)
+        {
+            try
+            {
+                var result = _custRepository.Deletecustomer(id);
+                log.Info("Deleted Customer with id =" + id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                log.Error("cannot delete" + ex);
+                throw;
+            }
+           
+        }
 
         //protected override void Dispose(bool disposing)
         //{

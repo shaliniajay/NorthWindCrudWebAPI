@@ -10,6 +10,8 @@ namespace NorthWindWebAPI.DataModel
         public Northwind()
             : base("name=Northwind")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<Customer> Customers { get; set; }
